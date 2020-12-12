@@ -7,5 +7,69 @@
         <link rel="stylesheet" type="text/css" href="main.css">
     </head>
     <body>
+        <div id="nav-bar">
+            <h1>Library</h1>
+            <input type="text" placeholder="Search..">
+            <button type="button" id="log-btn">Log in</button>
+        </div>
+        <div id="side-bar">
+            <h2>Your data</h2>
+            <ul id="data-list">
+                <li>Books <span class="data-list-value" id= "book-num">0</span></li>
+                <li>Completed Books <span class="data-list-value" id="completed-book-num">0</span></li>
+                <li>Number of pages <span class="data-list-value" id="page-num">0</span></li>
+                <li>Completed Pages <span class="data-list-value" id="completed-page-num">0</span></li>
+            </ul>
+            <h2>Storage</h2>
+            <button type="button" id="delete-local-btn">Delete All Local</button>
+        </div>
+        <div id="card-container">
+            <div class="card">
+                <h3>Lolita</h3>
+                <p>Vladimir Nabokov</p>
+                <p><span class="pages-read-num">336</span> of <span class="all-pages-num">336</span> pages read</p>
+                <div class="card-btn-container">
+                    <button type="button">Edit</button>
+                    <button type="button">Delete</button>
+                </div>
+            </div>
+            <div class="card">
+                <h3>The Old Man and the Sea</h3>
+                <p>Ernest Hemingway</p>
+                <p><span class="pages-read-num">127</span> of <span class="all-pages-num">127</span> pages read</p>
+                <div class="card-btn-container">
+                    <button type="button">Edit</button>
+                    <button type="button">Delete</button>
+                </div>
+            </div>
+            <div class="card">
+                <h3>1984</h3>
+                <p>George Orwell</p>
+                <p><span class="pages-read-num">328</span> of <span class="all-pages-num">328</span> pages read</p>
+                <div class="card-btn-container">
+                    <button type="button">Edit</button>
+                    <button type="button">Delete</button>
+                </div>
+            </div>
+            <div class="card">
+                <h3>The Idiot</h3>
+                <p>Fyodor Dostoyevsky</p>
+                <p><span class="pages-read-num">654</span> of <span class="all-pages-num">654</span> pages read</p>
+                <div class="card-btn-container">
+                    <button type="button">Edit</button>
+                    <button type="button">Delete</button>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <a href="https://github.com/ThomV93/Library" target="_blank" id="git-link">
+                <img src="GitHub-Mark-32px.png" id="git-logo">
+            </a>
+            <p>Created by TomVeit</p>
+            <a href="https://www.theodinproject.com/courses/javascript/lessons/library" target="_blank" id="odin-link">
+                <img src="Odin-Logo.svg" id="odin-logo">
+                <p>The Odin Project</p>
+            </a>
+        </footer>
         <script type="text/javascript" src="script.js"></script>
     </body>
