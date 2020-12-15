@@ -6,6 +6,8 @@
         <title>Library</title>
         <link rel="stylesheet" type="text/css" href="main.css">
         <link rel="stylesheet" type="text/css" href="css-reset.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Proza+Libre&display=swap" rel="stylesheet">
     </head>
     <body>
         <div id="nav-bar">
@@ -27,12 +29,13 @@
             </div>
             <div id="side-bar-storage">
                 <h2>Storage</h2>
-                <button type="button" id="delete-local-btn">Delete All Local</button>
+                <button type="button" id="delete-local-btn" class="delete-storage-btn">Delete All Local</button>
+                <button type="button" id="delete-cloud-btn" class="delete-storage-btn">Delete All Cloud</button>
             </div>
             <div id="side-bar-credit">
                 <p>Created by TomVeit</p>
                 <a href="https://github.com/ThomV93/Library" target="_blank" id="git-link">
-                    <img src="GitHub-Mark-32px.png" id="git-logo">
+                    <div id="img-container"></div>
                 </a>
             </div>
         </div>
