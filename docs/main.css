@@ -12,6 +12,7 @@ body {
 }
 
 button {
+    font-family: 'Proza Libre', sans-serif;
     border: 2px solid #FFF;
     border-radius: 22px;
     color: #FFF;
@@ -19,8 +20,19 @@ button {
     position: relative;
     text-decoration: none;
     width: auto;
-    background-color: transparent;
-    font-family: 'Proza Libre', sans-serif;
+    background: linear-gradient(to right, #fff 50%, transparent 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: all .5s ease-out;
+}
+
+button:hover {
+    background-position: left bottom;
+    color: #333;
+}
+
+button:focus {
+    outline: none;
 }
 
 #nav-bar {
@@ -29,8 +41,11 @@ button {
     align-items: center;
     grid-column: 1/ -1;
     grid-row: 1;
-    background-color: #ffffff;
+    background-color: #fff;
     padding: 1rem 2rem 1rem 2rem;
+    box-sizing: border-box;
+    box-shadow: 0 10px 23px -17px rgba(0,0,0,0.6);
+    z-index: 1;
 }
 
 #nav-bar > h1 {
@@ -38,6 +53,40 @@ button {
     font-weight: bold;
     color: #333333;
     font-size: 3rem;
+}
+
+#nav-input-container {
+    width: 50%;
+    text-align: right;
+}
+
+#search {
+    width: 240px;
+    border: 2px solid #333;
+    border-radius: 22px;
+    color: #333;
+    padding: 14px 18px 12px 14px;
+    font-family: 'Proza Libre', sans-serif;
+}
+
+#search:focus {
+    outline: none;
+}
+
+#log-btn {
+    border: 2px solid #333;
+    color: #333;
+    font-family: 'Proza Libre', sans-serif;
+    text-align: center;
+    background: linear-gradient(to right, #333 50%, transparent 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: all .5s ease-out;
+}
+
+#log-btn:hover {
+    background-position: left bottom;
+    color: #fff;
 }
 
 #side-bar {
@@ -48,9 +97,10 @@ button {
     grid-column: 1/ 4;
     grid-row: 2/ -1;
     background-color: #e52c30;
-    color: #ffffff;
+    color: #fff;
     font-family: 'Proza Libre', sans-serif;
     padding: 2rem;
+    box-shadow: 6px 6px 8px 2px #000;
 }
 
 #side-bar-data {
@@ -97,7 +147,7 @@ li > span {
 }
 
 #delete-local-btn {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 #side-bar-credit {
@@ -132,8 +182,8 @@ li > span {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    gap: 5rem;
-    padding: 1rem;
+    gap: 2rem;
+    padding: 2rem;
     grid-column: 4/ -1;
     grid-row: 2/ -1;
     overflow: scroll;
@@ -145,25 +195,65 @@ li > span {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    width: 180px;
-    height: 220px;
+    box-sizing: border-box;
+    box-shadow: 0 16px 31px -17px rgba(0,0,0,0.6);
+    width: 230px;
+    height: 300px;
     transition: 0.3s;
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #fff;
+    color: #000;
+    border-radius: 10px;
+}
+
+.card-info {
+    background-color: #333;
+    height: 50%;
+    color: #fff;
+    padding: 0 16px;
+    border-radius: 10px 10px 0 0;
+}
+
+.card-info > h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.card-info > p {
+    float: right;
+    margin-top: 10px;
 }
 
 .card-btn-container {
     display: flex;
-    align-items: stretch;
-    justify-content: stretch;
-    height: 30%;
+    flex-direction: column;
+    height: 45%;
+    padding: 0 16px;
 }
 
 .card-btn-container > button {
-    width: 50%;
+    border: 2px solid #333;
+    color: #333;
+    font-family: 'Proza Libre', sans-serif;
+    text-align: center;
+    background: linear-gradient(to right, #333 50%, transparent 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: all .5s ease-out;
+}
+
+.card-btn-container > button:hover {
+    background-position: left bottom;
+    color: #fff;
+}
+
+#edit-btn {
+    margin-bottom: 0.5rem;
 }
 
 .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 31px 46px -10px rgba(0,0,0,0.6);
 }
+
+/* Criar uma fila horizontal de livros lidos e uma de livros nao lidos. Estilo Netflix*/
