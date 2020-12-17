@@ -52,7 +52,7 @@ button:focus {
     font-family: 'Cormorant Garamond', serif;
     font-weight: bold;
     color: #333333;
-    font-size: 3rem;
+    font-size: 3.3rem;
 }
 
 #nav-input-container {
@@ -206,8 +206,10 @@ li > span {
 }
 
 .card-info {
+    display: flex;
+    flex-direction: column;
     background-color: #333;
-    height: 50%;
+    height: 60%;
     color: #fff;
     padding: 0 16px;
     border-radius: 10px 10px 0 0;
@@ -221,14 +223,87 @@ li > span {
 }
 
 .card-info > p {
-    float: right;
     margin-top: 10px;
+}
+
+#switch-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+#switch-container > p {
+    margin-right: 0.5rem;
+}
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+    text-align: justify;
+}
+  
+  /* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+  
+  /* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    transition: .4s;
+}
+  
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #333;
+    transition: .4s;
+}
+  
+input:checked + .slider {
+    background-color: #e52c30;
+}
+  
+input:focus + .slider {
+    box-shadow: 0 0 1px #e52c30;
+}
+  
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+  
+  /* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+  
+.slider.round:before {
+    border-radius: 50%;
 }
 
 .card-btn-container {
     display: flex;
     flex-direction: column;
-    height: 45%;
+    justify-content: space-evenly;
+    height: 40%;
     padding: 0 16px;
 }
 
@@ -246,10 +321,6 @@ li > span {
 .card-btn-container > button:hover {
     background-position: left bottom;
     color: #fff;
-}
-
-#edit-btn {
-    margin-bottom: 0.5rem;
 }
 
 .card:hover {
