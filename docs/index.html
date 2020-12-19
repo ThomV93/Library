@@ -10,37 +10,54 @@
         <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Proza+Libre&display=swap" rel="stylesheet">
     </head>
     <body>
-        <div id="nav-bar">
-            <h1>Library</h1>
-            <div id="nav-input-container">
-                <input id="search" type="text" placeholder="Search..">
-                <button  id="log-btn" type="button">Log in</button>
-            </div>
+        <div id="form-container">
+            <form id="book-creation-form">
+                <h2>New Book</h2>
+                <label for="book-tile">Title:</label>
+                <input type="text" id="book-title" name="book-title">
+                <label for="author">Author:</label>
+                <input type="text" id="author" name="author">
+                <label for="total-pages">Number of Pages:</label>
+                <input type="text" id="total-pages" name="total-pages">
+            </form>
         </div>
-        <div id="side-bar">
-            <div id="side-bar-data">
-                <h2>Your data</h2>
-                <ul id="data-list">
-                    <li>Books <span class="data-list-value" id="book-num">0</span></li>
-                    <li>Completed Books <span class="data-list-value" id="completed-book-num">0</span></li>
-                    <li>Total pages <span class="data-list-value" id="total-page-num">0</span></li>
-                    <li>Total Completed Pages <span class="data-list-value" id="total-completed-page-num">0</span></li>
-                </ul>
+        <main>
+            <div id="nav-bar">
+                <h1>Library</h1>
+                <div id="nav-input-container">
+                    <input id="search" type="text" placeholder="Search..">
+                    <button  id="log-btn" type="button">Log in</button>
+                </div>
             </div>
-            <div id="side-bar-storage">
-                <h2>Storage</h2>
-                <button type="button" id="delete-local-btn" class="delete-storage-btn">Delete All Local</button>
-                <button type="button" id="delete-cloud-btn" class="delete-storage-btn">Delete All Cloud</button>
+            <div id="side-bar">
+                <div id="side-bar-data">
+                    <h2>Your data</h2>
+                    <ul id="data-list">
+                        <li>Books <span class="data-list-value" id="book-num">0</span></li>
+                        <li>Completed Books <span class="data-list-value" id="completed-book-num">0</span></li>
+                        <li>Total pages <span class="data-list-value" id="total-page-num">0</span></li>
+                        <li>Total Completed Pages <span class="data-list-value" id="total-completed-page-num">0</span></li>
+                    </ul>
+                </div>
+                <div id="side-bar-storage">
+                    <h2>Storage</h2>
+                    <button type="button" id="delete-local-btn" class="delete-storage-btn">Delete All Local</button>
+                    <button type="button" id="delete-cloud-btn" class="delete-storage-btn">Delete All Cloud</button>
+                </div>
+                <div id="side-bar-credit">
+                    <p>Created by TomVeit</p>
+                    <a href="https://github.com/ThomV93/Library" target="_blank" id="git-link">
+                        <div id="img-container"></div>
+                    </a>
+                </div>
             </div>
-            <div id="side-bar-credit">
-                <p>Created by TomVeit</p>
-                <a href="https://github.com/ThomV93/Library" target="_blank" id="git-link">
-                    <div id="img-container"></div>
-                </a>
+            <div id="card-container">
+                <div class="card">
+                    <div id="creator-container">
+                        <div id="plus"></div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div id="card-container">
-
-        </div>
+        </main>
         <script type="text/javascript" src="script.js"></script>
     </body>

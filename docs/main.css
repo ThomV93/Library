@@ -1,10 +1,11 @@
-html, body {
+html, main {
     height: 100%;
     color: #f4f4f9;
     box-sizing: border-box;
 }
 
-body {
+main {
+    position: absolute;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(12, 1fr);
@@ -327,4 +328,78 @@ input:checked + .slider:before {
     box-shadow: 0 31px 46px -10px rgba(0,0,0,0.6);
 }
 
-/* Criar uma fila horizontal de livros lidos e uma de livros nao lidos. Estilo Netflix*/
+#creator-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(to right, #333 50%, transparent 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: all .5s ease-out;
+}
+
+#creator-container:hover {
+    background-position: left bottom;
+}
+
+#creator-container > div:hover {
+    width: 200px;
+    height: 200px;
+    transform: scale(1.1);
+    background: linear-gradient(#fff,#fff), linear-gradient(#fff,#fff);
+    background-position: center;
+    background-size: 50% 2px,2px 50%;
+    background-repeat: no-repeat;
+}
+
+#plus {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(#333,#333), linear-gradient(#333,#333);
+    background-position: center;
+    background-size: 50% 2px,2px 50%;
+    background-repeat: no-repeat;
+}
+
+#form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    z-index: 100;
+    background-color: rgba(0,0,0,0.6);
+}
+
+#book-creation-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    height: 400px;
+    padding: 16px;
+    color: #333;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+#book-creation-form > h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: bold;
+    font-size: 2.3rem;
+    margin-bottom: 20px;
+}
+
+#book-creation-form > input {
+    width: 240px;
+    border: 2px solid #333;
+    border-radius: 22px;
+    color: #333;
+    padding: 14px 18px 12px 14px;
+    font-family: 'Proza Libre', sans-serif;
+    margin-bottom: 1rem;
+}

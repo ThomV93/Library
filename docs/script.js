@@ -1,5 +1,6 @@
 let myLibrary = [];
 const cardContainer_div = document.getElementById("card-container");
+const cardCreator_div = document.getElementById("card-creator");
 const bookNum_span = document.getElementById("book-num");
 const completedBookNum_span = document.getElementById("completed-book-num");
 const totalPageNum_span = document.getElementById("total-page-num");
