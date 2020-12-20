@@ -227,7 +227,7 @@ li > span {
     margin-top: 10px;
 }
 
-#switch-container {
+.switch-container {
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
@@ -236,7 +236,7 @@ li > span {
     height: 100%;
 }
 
-#switch-container > p {
+.switch-container > p {
     margin-right: 0.5rem;
 }
 
