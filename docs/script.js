@@ -1,14 +1,13 @@
 let myLibrary = [];
 const cardContainer_div = document.getElementById("card-container");
-const cardCreator_div = document.getElementById("card-creator");
+const cardCreator_div = document.getElementById("creator-container");
 const bookNum_span = document.getElementById("book-num");
 const completedBookNum_span = document.getElementById("completed-book-num");
 const totalPageNum_span = document.getElementById("total-page-num");
 const totalCompletedPageNum_span = document.getElementById("total-completed-page-num");
 
 
-function library() {
-};
+function library() {};
 
 library.prototype.info = function() {
     return this.title + " by " + this.author + ", " + this.pages + ", " + this.read;
@@ -23,9 +22,6 @@ function book(title, author, pages, read) {
 
 book.prototype = Object.create(library.prototype);
 
-function addBookToLibrary(obj){
-    myLibrary.push(obj);
-};
 
 function displayBooks() {
     myLibrary.forEach(item => {
@@ -35,7 +31,7 @@ function displayBooks() {
             <div class="card-info">
                 <h3 class="card-title">${item.title}</h3>
                 <p class="card-author">${item.author}</p>
-                <p><span class="pages-read-num">${item.pages}</span> of <span class="all-pages-num">${item.pages}</span> pages</p>
+                <p><span class="all-pages-num">${item.pages}</span> pages</p>
                 <div id="switch-container">
                     <p>Read</p>
                     <label class="switch">
@@ -58,7 +54,9 @@ function displayData() {
     bookNum_span.innerHTML = myLibrary.length;
 };
 
-
+function addBookToLibrary(obj){
+    myLibrary.push(obj);
+};
 
 
 
