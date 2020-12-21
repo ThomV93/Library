@@ -412,6 +412,10 @@ input:checked + .slider:before {
     margin-bottom: 1rem;
 }
 
+#book-creation-form > input:focus {
+    outline: none;
+}
+
 
 #form-btn-container {
     display: flex;
