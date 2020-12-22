@@ -2,6 +2,7 @@ let myLibrary = [];
 const cardContainer_div = document.getElementById("card-container");
 const cardCreator_div = document.getElementById("creator-container");
 const cardDeleteButton_btn = document.getElementsByClassName("delete-btn");
+const cardEditButton_btn = document.getElementsByClassName("edit-btn");
 const plus_div = document.getElementById("plus");
 const formContainer_div = document.getElementById("form-container");
 const bookTitle_input = document.getElementById("book-title");
@@ -143,23 +144,34 @@ function createBookForm(newBook) {
         newBook = new book(inputTitle, inputAuthor, inputPages, "read");
         addBookToLibrary(newBook);
         displayBooks(newBook);
+        editCardButton();
         deleteCardButton();
         closeForm();
     });
 };
 
+function editCardButton() {
+    let lastBookEditBtn = Array.from(cardEditButton_btn).pop();
+    lastBookEditBtn.addEventListener("click", e => {
+        console.log(e);
+    });
+};
+
 function deleteCardButton() {
-    let lastBookDeletebtn = Array.from(cardDeleteButton_btn).pop();
-    lastBookDeletebtn.addEventListener("click", e =>{
-        let position = e.path[2].dataset.position;
-        if (position === 0){
+    let lastBookDeleteBtn = Array.from(cardDeleteButton_btn).pop();
+    lastBookDeleteBtn.addEventListener("click", e => {
+        let bookPosition = e.path[2].dataset.position;
+        if (bookPosition === 0){
             myLibrary = [];
         } else {
-            myLibrary.splice(position, 1);
+            myLibrary.splice(bookPosition, 1);
             e.path[2].remove();
         };
     });
 };
+
+
+
 
 openForm();
 createBookForm();
