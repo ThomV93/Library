@@ -1,6 +1,7 @@
 let myLibrary = [];
 const cardContainer_div = document.getElementById("card-container");
 const cardCreator_div = document.getElementById("creator-container");
+const cardDeleteButton_btn = document.getElementsByClassName("delete-btn");
 const plus_div = document.getElementById("plus");
 const formContainer_div = document.getElementById("form-container");
 const bookTitle_input = document.getElementById("book-title");
@@ -37,6 +38,7 @@ function displayBooks(book) {
     //create card element
     let bookCard = document.createElement("div");
     bookCard.className = "card";
+    bookCard.dataset.position = myLibrary.indexOf(book);
 
 
     //card info section
@@ -90,12 +92,12 @@ function displayBooks(book) {
     cardButtonContainer.className = "card-btn-container";
     
     let cardEditButton = document.createElement("button");
-    cardEditButton.id = "edit-btn";
+    cardEditButton.className = "edit-btn";
     cardEditButton.type = "button";
     cardEditButton.innerHTML = "Edit";
 
     let cardDeleteButton = document.createElement("button");
-    cardDeleteButton.id = "delete-btn";
+    cardDeleteButton.className = "delete-btn";
     cardEditButton.type = "button";
     cardDeleteButton.innerHTML = "Delete"
 
@@ -112,7 +114,6 @@ function displayBooks(book) {
 function addBookToLibrary(obj){
     myLibrary.push(obj);
 };
-
 
 function openForm() {
     plus_div.addEventListener("click", () => {
@@ -142,10 +143,23 @@ function createBookForm(newBook) {
         newBook = new book(inputTitle, inputAuthor, inputPages, "read");
         addBookToLibrary(newBook);
         displayBooks(newBook);
+        deleteCardButton();
         closeForm();
     });
 };
 
+function deleteCardButton() {
+    let lastBookDeletebtn = Array.from(cardDeleteButton_btn).pop();
+    lastBookDeletebtn.addEventListener("click", e =>{
+        let position = e.path[2].dataset.position;
+        if (position === 0){
+            myLibrary = [];
+        } else {
+            myLibrary.splice(position, 1);
+            e.path[2].remove();
+        };
+    });
+};
 
 openForm();
 createBookForm();
