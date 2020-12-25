@@ -433,3 +433,7 @@ input:checked + .slider:before {
     padding: 10px 14px 8px 10px;
     font-family: 'Proza Libre', sans-serif;
 }
+
+#form-edit-btn {
+    display: none;
+}

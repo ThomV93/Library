@@ -5,11 +5,13 @@ const cardDeleteButton_btn = document.getElementsByClassName("delete-btn");
 const cardEditButton_btn = document.getElementsByClassName("edit-btn");
 const plus_div = document.getElementById("plus");
 const formContainer_div = document.getElementById("form-container");
+const formBtnContainer_div = document.getElementById("form-btn-container");
 const bookTitle_input = document.getElementById("book-title");
 const author_input = document.getElementById("author");
 const pages_input = document.getElementById("total-pages");
 const formCancelBtn = document.getElementById("cancel-btn");
 const formCreateBtn = document.getElementById("create-btn");
+const formEditBtn = document.getElementById("form-edit-btn");
 const bookCount_span = document.getElementById("book-num");
 const completedBookNum_span = document.getElementById("completed-book-num");
 const totalPageNum_span = document.getElementById("total-page-num");
@@ -18,10 +20,12 @@ const totalCompletedPageNum_span = document.getElementById("total-completed-page
 //Prototype object
 function library() {};
 
+
 //Add info function to the prototype of library
 library.prototype.info = function() {
     return this.title + " by " + this.author + ", " + this.pages + ", " + this.read;
 };
+
 
 //Book object constructor
 function book(title, author, pages, read) {
@@ -31,8 +35,10 @@ function book(title, author, pages, read) {
     this.read = read
 };
 
+
 //Set a copy of library prototype to each book contructed
 book.prototype = Object.create(library.prototype);
+
 
 //Create new book HTML structure for each book in the myLibrary array
 function displayBooks(book) {
@@ -55,6 +61,7 @@ function displayBooks(book) {
     cardAuthor.innerHTML = book.author;
 
     let cardPagesNum = document.createElement("p");
+    cardPagesNum.className = "card-pages";
     cardPagesNum.innerHTML = book.pages + " pages";
 
 
@@ -112,16 +119,27 @@ function displayBooks(book) {
     cardContainer_div.appendChild(bookCard);
 };
 
+
+//Push each new object created in the myLibrary array
 function addBookToLibrary(obj){
     myLibrary.push(obj);
 };
 
+
+//Makes the new book form visible
 function openForm() {
     plus_div.addEventListener("click", () => {
+        bookTitle_input.value = "";
+        author_input.value = "";
+        pages_input.value = "";
+        formCreateBtn.style.display = "block";
+        formEditBtn.style.display = "none";
         formContainer_div.style.display = "flex";
     });
 };
 
+
+//Close the form and erase the values
 function closeForm() {
     bookTitle_input.value = "";
     author_input.value = "";
@@ -129,19 +147,22 @@ function closeForm() {
     formContainer_div.style.display = "none";
 };
 
+
+//Add event listeners in each button of the form
 function createBookForm(newBook) {
     //cancel button
     formCancelBtn.addEventListener("click", () => {
         formContainer_div.style.display = "none";
     });
 
-    //create button
+    //create new book button
     formCreateBtn.addEventListener("click", () => {
         let inputTitle = bookTitle_input.value;
         let inputAuthor = author_input.value;
         let inputPages = pages_input.value;
 
-        newBook = new book(inputTitle, inputAuthor, inputPages, "read");
+        //create a new book object with the provided values
+        newBook = new book(inputTitle, inputAuthor, inputPages, "false");
         addBookToLibrary(newBook);
         displayBooks(newBook);
         editCardButton();
@@ -150,10 +171,47 @@ function createBookForm(newBook) {
     });
 };
 
+//Create the new edit button for the form
+function editFormButton() {
+    //hides the create button
+    formCreateBtn.style.display = "none";
+    //display edit button
+    formEditBtn.style.display = "block";
+    //display form
+    formContainer_div.style.display = "flex";
+};
+
 function editCardButton() {
     let lastBookEditBtn = Array.from(cardEditButton_btn).pop();
     lastBookEditBtn.addEventListener("click", e => {
-        console.log(e);
+        //open form with present values
+        let bookPositionEdit = e.path[2].dataset.position;
+        let obj = myLibrary[bookPositionEdit];
+        bookTitle_input.value = obj.title;
+        author_input.value = obj.author;
+        pages_input.value = obj.pages;
+
+        //select HTML elements to edit
+        let chosenCard = e.path[2];
+        let chosenCardTitle = chosenCard.getElementsByClassName("card-title");
+        let chosenCardAuthor = chosenCard.getElementsByClassName("card-author");
+        let chosenCardPages = chosenCard.getElementsByClassName("card-pages");
+
+        editFormButton();
+
+        formEditBtn.addEventListener("click", () => {
+            //alter book obj values
+            obj.title = bookTitle_input.value;
+            obj.author = author_input.value;
+            obj.pages = pages_input.value;
+
+            //alter HTML element values
+            chosenCardTitle[0].innerHTML = bookTitle_input.value;
+            chosenCardAuthor[0].innerHTML = author_input.value;
+            chosenCardPages[0].innerHTML = pages_input.value;
+
+            closeForm();
+        });
     });
 };
 
@@ -171,9 +229,10 @@ function deleteCardButton() {
 };
 
 
-
-
 openForm();
 createBookForm();
 
-  
+
+  //search button performs a dinamic search
+  //the overall data is displayed in the side column
+  //have both local and remote storage for the project
