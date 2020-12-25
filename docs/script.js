@@ -6,16 +6,17 @@ const cardEditButton_btn = document.getElementsByClassName("edit-btn");
 const plus_div = document.getElementById("plus");
 const formContainer_div = document.getElementById("form-container");
 const formBtnContainer_div = document.getElementById("form-btn-container");
-const bookTitle_input = document.getElementById("book-title");
-const author_input = document.getElementById("author");
-const pages_input = document.getElementById("total-pages");
 const formCancelBtn = document.getElementById("cancel-btn");
 const formCreateBtn = document.getElementById("create-btn");
 const formEditBtn = document.getElementById("form-edit-btn");
+const bookTitle_input = document.getElementById("book-title");
+const author_input = document.getElementById("author");
+const pages_input = document.getElementById("total-pages");
 const bookCount_span = document.getElementById("book-num");
 const completedBookNum_span = document.getElementById("completed-book-num");
 const totalPageNum_span = document.getElementById("total-page-num");
 const totalCompletedPageNum_span = document.getElementById("total-completed-page-num");
+const searchBar_input = document.getElementById("search");
 
 //Prototype object
 function library() {};
@@ -171,6 +172,7 @@ function createBookForm(newBook) {
     });
 };
 
+
 //Create the new edit button for the form
 function editFormButton() {
     //hides the create button
@@ -181,6 +183,8 @@ function editFormButton() {
     formContainer_div.style.display = "flex";
 };
 
+
+//add event to the edit button in the card and perform necessary actions
 function editCardButton() {
     let lastBookEditBtn = Array.from(cardEditButton_btn).pop();
     lastBookEditBtn.addEventListener("click", e => {
@@ -199,6 +203,7 @@ function editCardButton() {
 
         editFormButton();
 
+        //add click event to the edit button inside the form
         formEditBtn.addEventListener("click", () => {
             //alter book obj values
             obj.title = bookTitle_input.value;
@@ -215,6 +220,8 @@ function editCardButton() {
     });
 };
 
+
+//add event to the delete button in the card and perform necessary actions
 function deleteCardButton() {
     let lastBookDeleteBtn = Array.from(cardDeleteButton_btn).pop();
     lastBookDeleteBtn.addEventListener("click", e => {
@@ -228,11 +235,34 @@ function deleteCardButton() {
     });
 };
 
+function searchBar() {
+    let filter = searchBar_input.value.toUpperCase();
+    let cards = cardContainer_div.getElementsByClassName("card");
+    let txtValue;
+    for (i = 1; i < cards.length; i++) {
+        let card = cards[i];
+        txtValue = card.textContent || card.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            card.style.display = "flex";
+        } else {
+            card.style.display = "none";
+        }
+    }
+};
+
+function activateSearchBar() {
+    searchBar_input.addEventListener("input", () => {
+        searchBar();
+    });
+};
+
 
 openForm();
 createBookForm();
+activateSearchBar();
 
 
-  //search button performs a dinamic search
+
+  //Find and fix edit button bugs
   //the overall data is displayed in the side column
   //have both local and remote storage for the project
