@@ -142,9 +142,6 @@ function openForm() {
 
 //Close the form and erase the values
 function closeForm() {
-    bookTitle_input.value = "";
-    author_input.value = "";
-    pages_input.value = "";
     formContainer_div.style.display = "none";
 };
 
@@ -235,6 +232,8 @@ function deleteCardButton() {
     });
 };
 
+
+//search bar dinamically hides results that don't match
 function searchBar() {
     let filter = searchBar_input.value.toUpperCase();
     let cards = cardContainer_div.getElementsByClassName("card");
@@ -250,6 +249,8 @@ function searchBar() {
     }
 };
 
+
+//input event listener
 function activateSearchBar() {
     searchBar_input.addEventListener("input", () => {
         searchBar();
@@ -263,6 +264,7 @@ activateSearchBar();
 
 
 
-  //Find and fix edit button bugs
+  //Find and fix edit button bugs. Edit bug after delete? myLibrary splice mixed the references of the edit form
+  //read checkbox
   //the overall data is displayed in the side column
   //have both local and remote storage for the project
