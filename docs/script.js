@@ -27,7 +27,6 @@ library.prototype.info = function() {
     return this.title + " by " + this.author + ", " + this.pages + ", " + this.read;
 };
 
-
 //Book object constructor
 function book(title, author, pages, read) {
     this.title = title,
@@ -42,7 +41,7 @@ book.prototype = Object.create(library.prototype);
 
 
 //Create new book HTML structure for each book in the myLibrary array
-function displayBooks(book) {
+function displayBook(book) {
     //create card element
     let bookCard = document.createElement("div");
     bookCard.className = "card";
@@ -80,6 +79,7 @@ function displayBooks(book) {
     
     //interior of label section
     let cardSwitchLabelInput = document.createElement("input");
+    cardSwitchLabelInput.className = "switch-checkbox";
     cardSwitchLabelInput.type = "checkbox";
 
     let cardSwitchLabelSpan = document.createElement("span");
@@ -160,9 +160,9 @@ function createBookForm(newBook) {
         let inputPages = pages_input.value;
 
         //create a new book object with the provided values
-        newBook = new book(inputTitle, inputAuthor, inputPages, "false");
+        newBook = new book(inputTitle, inputAuthor, inputPages, false);
         addBookToLibrary(newBook);
-        displayBooks(newBook);
+        displayBook(newBook);
         editCardButton();
         deleteCardButton();
         closeForm();
@@ -185,18 +185,20 @@ function editFormButton() {
 function editCardButton() {
     let lastBookEditBtn = Array.from(cardEditButton_btn).pop();
     lastBookEditBtn.addEventListener("click", e => {
-        //open form with present values
-        let bookPositionEdit = e.path[2].dataset.position;
-        let obj = myLibrary[bookPositionEdit];
-        bookTitle_input.value = obj.title;
-        author_input.value = obj.author;
-        pages_input.value = obj.pages;
-
         //select HTML elements to edit
         let chosenCard = e.path[2];
         let chosenCardTitle = chosenCard.getElementsByClassName("card-title");
         let chosenCardAuthor = chosenCard.getElementsByClassName("card-author");
         let chosenCardPages = chosenCard.getElementsByClassName("card-pages");
+
+        //populate the form with the current values of each field
+        bookTitle_input.value = chosenCardTitle[0].innerHTML;
+        author_input.value = chosenCardAuthor[0].innerHTML;
+        pages_input.value = chosenCardPages[0].innerHTML;
+
+        //select correct book obj
+        let bookPositionEdit = myLibrary.findIndex(o => o.title == chosenCardTitle[0].innerHTML);
+        let obj = myLibrary[bookPositionEdit];
 
         editFormButton();
 
@@ -258,13 +260,20 @@ function activateSearchBar() {
 };
 
 
+/*function displayData() {
+    bookCount_span.innerHTML = myLibrary.length;
+};*/
+
+//setInterval(displayData, 300);
+
+
 openForm();
 createBookForm();
 activateSearchBar();
 
 
 
-  //Find and fix edit button bugs. Edit bug after delete? myLibrary splice mixed the references of the edit form
-  //read checkbox
-  //the overall data is displayed in the side column
-  //have both local and remote storage for the project
+//read checkbox
+//the overall data is displayed in the side column
+//have both local and remote storage for the project
+//create display function to display all the HTML cards after reloading

@@ -416,7 +416,6 @@ input:checked + .slider:before {
     outline: none;
 }
 
-
 #form-btn-container {
     display: flex;
     flex-direction: column;
