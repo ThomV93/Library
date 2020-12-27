@@ -19,6 +19,7 @@ const totalPageNum_span = document.getElementById("total-page-num");
 const totalCompletedPageNum_span = document.getElementById("total-completed-page-num");
 const searchBar_input = document.getElementById("search");
 
+
 //Prototype object
 function library() {};
 
@@ -167,6 +168,8 @@ function createBookForm(newBook) {
         readCheckbox(newBook);
         editCardButton();
         deleteCardButton();
+        totalBooks();
+        totalPages();
         closeForm();
     });
 };
@@ -216,6 +219,10 @@ function editCardButton() {
             chosenCardAuthor[0].innerHTML = author_input.value;
             chosenCardPages[0].innerHTML = pages_input.value;
 
+            totalBooks();
+            totalPages();
+            totalCompleteBooks();
+            totalCompletePages();
             closeForm();
         });
     });
@@ -236,6 +243,8 @@ function deleteCardButton() {
     });
 };
 
+
+//add event to the switch checkbox and alters the read key in the respective object
 function readCheckbox(item) {
     let lastSwitchCheckbox = Array.from(cardSwitchCheckbox_chb).pop();
     lastSwitchCheckbox.addEventListener("change", e => {
@@ -244,7 +253,8 @@ function readCheckbox(item) {
         } else {
             item.read = false;
         };
-        console.log(e);
+        totalCompleteBooks();
+        totalCompletePages();
     });
 };
 
@@ -274,11 +284,41 @@ function activateSearchBar() {
 };
 
 
-/*function displayData() {
+//calculate and display the total number of books
+function totalBooks() {
     bookCount_span.innerHTML = myLibrary.length;
-};*/
+};
 
-//setInterval(displayData, 300);
+
+//calculate and display the total number of read books
+function totalCompleteBooks() {
+    let readBooks = 0;
+    for (i = 0; i < myLibrary.length; i++){
+        if (myLibrary[i].read === true) {
+            readBooks++;
+        };
+    };
+    completedBookNum_span.innerHTML = readBooks;
+};
+
+
+//calculate and display the total number of pages
+function totalPages() {
+    let totalpageNum = myLibrary.reduce((acc, item) => acc += parseInt(item.pages),0);
+    totalPageNum_span.innerHTML = totalpageNum;
+};
+
+
+//calculate and display the total number of read pages
+function totalCompletePages() {
+    let totalReadPages = 0;
+    for (i = 0; i < myLibrary.length; i++){
+        if (myLibrary[i].read === true) {
+            totalReadPages += parseInt(myLibrary[i].pages);
+        };
+    };
+    totalCompletedPageNum_span.innerHTML = totalReadPages;
+};
 
 
 openForm();
@@ -286,8 +326,5 @@ createBookForm();
 activateSearchBar();
 
 
-
-//read checkbox
-//the overall data is displayed in the side column
 //have both local and remote storage for the project
-//create display function to display all the HTML cards after reloading
+//create display function to display all the HTML cards with their respective caracteristicas after reloading
