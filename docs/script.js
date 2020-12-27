@@ -3,6 +3,7 @@ const cardContainer_div = document.getElementById("card-container");
 const cardCreator_div = document.getElementById("creator-container");
 const cardDeleteButton_btn = document.getElementsByClassName("delete-btn");
 const cardEditButton_btn = document.getElementsByClassName("edit-btn");
+const cardSwitchCheckbox_chb = document.getElementsByClassName("switch-checkbox");
 const plus_div = document.getElementById("plus");
 const formContainer_div = document.getElementById("form-container");
 const formBtnContainer_div = document.getElementById("form-btn-container");
@@ -163,6 +164,7 @@ function createBookForm(newBook) {
         newBook = new book(inputTitle, inputAuthor, inputPages, false);
         addBookToLibrary(newBook);
         displayBook(newBook);
+        readCheckbox(newBook);
         editCardButton();
         deleteCardButton();
         closeForm();
@@ -231,6 +233,18 @@ function deleteCardButton() {
             myLibrary.splice(bookPosition, 1);
             e.path[2].remove();
         };
+    });
+};
+
+function readCheckbox(item) {
+    let lastSwitchCheckbox = Array.from(cardSwitchCheckbox_chb).pop();
+    lastSwitchCheckbox.addEventListener("change", e => {
+        if (lastSwitchCheckbox.checked){
+            item.read = true;
+        } else {
+            item.read = false;
+        };
+        console.log(e);
     });
 };
 
