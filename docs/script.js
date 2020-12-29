@@ -6,6 +6,7 @@ const cardEditButton_btn = document.getElementsByClassName("edit-btn");
 const cardSwitchCheckbox_chb = document.getElementsByClassName("switch-checkbox");
 const plus_div = document.getElementById("plus");
 const formContainer_div = document.getElementById("form-container");
+const formTitle_h2 = document.getElementById("form-title");
 const formBtnContainer_div = document.getElementById("form-btn-container");
 const formCancelBtn = document.getElementById("cancel-btn");
 const formCreateBtn = document.getElementById("create-btn");
@@ -137,6 +138,7 @@ function openForm() {
         pages_input.value = "";
         formCreateBtn.style.display = "block";
         formEditBtn.style.display = "none";
+        formTitle_h2.innerHTML = "New Book";
         formContainer_div.style.display = "flex";
     });
 };
@@ -176,13 +178,46 @@ function createBookForm(newBook) {
 
 
 //Create the new edit button for the form
-function editFormButton() {
+function editFormButton(idx) {
     //hides the create button
     formCreateBtn.style.display = "none";
     //display edit button
     formEditBtn.style.display = "block";
+    //change form title
+    formTitle_h2.innerHTML = `Edit Book Nº ${idx}`;
     //display form
     formContainer_div.style.display = "flex";
+};
+
+function editBtnFormlistener() {
+    formEditBtn.addEventListener("click", () => {
+        //select correct book obj
+        let bookPositionEdit = formTitle_h2.innerHTML.slice(-1);
+        let obj = myLibrary[bookPositionEdit];
+
+        //select correct HTML element values
+        let allCardsInfo_div = document.getElementsByClassName("card-info");
+        let correctCardInfo = allCardsInfo_div[bookPositionEdit];
+        correctCardInfo.childNodes[0].innerHTML;
+        correctCardInfo.childNodes[1].innerHTML;
+        correctCardInfo.childNodes[2].innerHTML;
+
+        //alter HTML element values
+        correctCardInfo.childNodes[0].innerHTML = bookTitle_input.value;
+        correctCardInfo.childNodes[1].innerHTML = author_input.value;
+        correctCardInfo.childNodes[2].innerHTML = pages_input.value;
+
+        //alter book obj values
+        obj.title = bookTitle_input.value;
+        obj.author = author_input.value;
+        obj.pages = pages_input.value;
+
+        totalBooks();
+        totalPages();
+        totalCompleteBooks();
+        totalCompletePages();
+        closeForm();
+    });
 };
 
 
@@ -192,6 +227,7 @@ function editCardButton() {
     lastBookEditBtn.addEventListener("click", e => {
         //select HTML elements to edit
         let chosenCard = e.path[2];
+        let cardPosition = chosenCard.dataset.position;
         let chosenCardTitle = chosenCard.getElementsByClassName("card-title");
         let chosenCardAuthor = chosenCard.getElementsByClassName("card-author");
         let chosenCardPages = chosenCard.getElementsByClassName("card-pages");
@@ -201,30 +237,7 @@ function editCardButton() {
         author_input.value = chosenCardAuthor[0].innerHTML;
         pages_input.value = chosenCardPages[0].innerHTML;
 
-        //select correct book obj
-        let bookPositionEdit = myLibrary.findIndex(o => o.title == chosenCardTitle[0].innerHTML);
-        let obj = myLibrary[bookPositionEdit];
-
-        editFormButton();
-
-        //add click event to the edit button inside the form
-        formEditBtn.addEventListener("click", () => {
-            //alter book obj values
-            obj.title = bookTitle_input.value;
-            obj.author = author_input.value;
-            obj.pages = pages_input.value;
-
-            //alter HTML element values
-            chosenCardTitle[0].innerHTML = bookTitle_input.value;
-            chosenCardAuthor[0].innerHTML = author_input.value;
-            chosenCardPages[0].innerHTML = pages_input.value;
-
-            totalBooks();
-            totalPages();
-            totalCompleteBooks();
-            totalCompletePages();
-            closeForm();
-        });
+        editFormButton(cardPosition);
     });
 };
 
@@ -322,9 +335,14 @@ function totalCompletePages() {
 
 
 openForm();
+editBtnFormlistener();
 createBookForm();
 activateSearchBar();
 
 
 //have both local and remote storage for the project
-//create display function to display all the HTML cards with their respective caracteristicas after reloading
+//create display function to display all the HTML cards with their respective caracteristics after reloading
+//add regex to each the inputs in the form
+
+//Finishing touches
+//no blind spots in the card creator
