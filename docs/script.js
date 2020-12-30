@@ -19,6 +19,7 @@ const completedBookNum_span = document.getElementById("completed-book-num");
 const totalPageNum_span = document.getElementById("total-page-num");
 const totalCompletedPageNum_span = document.getElementById("total-completed-page-num");
 const searchBar_input = document.getElementById("search");
+const deleteLocalStorage_btn = document.getElementById("delete-local-btn");
 
 
 //Prototype object
@@ -150,6 +151,24 @@ function closeForm() {
 };
 
 
+//Add keyboard listener to the pages field of the form to allow only numbers
+/*function pageInputForm() {
+    pages_input.addEventListener("keydown", e => {
+        //regEx to check if the input is a number
+        let rawInput = parseInt(e.key);
+        let treatedInput = /[^0-9]/.test(rawInput);
+        let stringInput = treatedInput.toString();
+        console.log(stringInput);
+        console.log(typeof(stringInput));
+        
+
+        if (treatedInput === true) {
+            pages_input.value =+ stringInput;
+        }; 
+    });
+};*/
+
+
 //Add event listeners in each button of the form
 function createBookForm(newBook) {
     //cancel button
@@ -166,12 +185,13 @@ function createBookForm(newBook) {
         //create a new book object with the provided values
         newBook = new book(inputTitle, inputAuthor, inputPages, false);
         addBookToLibrary(newBook);
-        displayBook(newBook);
+        localSaveLibrary();//update the myLibrary array in the local storage
+        displayBook(newBook);//create the visual display for each book
         readCheckbox(newBook);
         editCardButton();
         deleteCardButton();
-        totalBooks();
-        totalPages();
+        totalBooks();//calculate and displays the total number of books
+        totalPages();//calculate and displays the total number of pages
         closeForm();
     });
 };
@@ -189,6 +209,8 @@ function editFormButton(idx) {
     formContainer_div.style.display = "flex";
 };
 
+
+//add event listener to the form edit button
 function editBtnFormlistener() {
     formEditBtn.addEventListener("click", () => {
         //select correct book obj
@@ -216,6 +238,7 @@ function editBtnFormlistener() {
         totalPages();
         totalCompleteBooks();
         totalCompletePages();
+        localSaveLibrary();
         closeForm();
     });
 };
@@ -225,6 +248,7 @@ function editBtnFormlistener() {
 function editCardButton() {
     let lastBookEditBtn = Array.from(cardEditButton_btn).pop();
     lastBookEditBtn.addEventListener("click", e => {
+        console.log(e);
         //select HTML elements to edit
         let chosenCard = e.path[2];
         let cardPosition = chosenCard.dataset.position;
@@ -251,6 +275,7 @@ function deleteCardButton() {
             myLibrary = [];
         } else {
             myLibrary.splice(bookPosition, 1);
+            localSaveLibrary();
             e.path[2].remove();
         };
     });
@@ -260,7 +285,7 @@ function deleteCardButton() {
 //add event to the switch checkbox and alters the read key in the respective object
 function readCheckbox(item) {
     let lastSwitchCheckbox = Array.from(cardSwitchCheckbox_chb).pop();
-    lastSwitchCheckbox.addEventListener("change", e => {
+    lastSwitchCheckbox.addEventListener("change", () => {
         if (lastSwitchCheckbox.checked){
             item.read = true;
         } else {
@@ -334,15 +359,60 @@ function totalCompletePages() {
 };
 
 
+//Save myLibrary data to the local storage object
+function localSaveLibrary() {
+    localStorage.setItem("myLibrary", JSON.stringify(myLibrary)); //JSON.stringify converts all objects to strings. The server only accepts strings
+};
+
+//repopulates the display after recovering the data from storage
+function displayCards() {
+    for (i = 0; i < myLibrary.length; i++) {
+        displayBook(myLibrary[i]);//create the visual display for each book
+        readCheckbox(myLibrary[i]);
+        editCardButton();
+        deleteCardButton();
+        totalBooks();//calculate and displays the total number of books
+        totalPages();//calculate and displays the total number of pages
+    };
+};
+
+
+//Get the myLibrary array after the page is reopened or refreshed
+function restoreLibrary() {
+    if (!localStorage.myLibrary) {
+        //populates the display
+        displayCards();
+    } else {
+        //recover the info stored locally
+        let bookArray = localStorage.getItem('myLibrary')
+        bookArray = JSON.parse(bookArray);
+        myLibrary = bookArray;
+        displayCards();
+    }
+}
+
+
+function deleteLocalBtn() {
+    deleteLocalStorage_btn.addEventListener("click", () => {
+        localStorage.clear();
+        window.location.reload();
+    });
+};
+
+
 openForm();
 editBtnFormlistener();
 createBookForm();
 activateSearchBar();
+restoreLibrary();
+deleteLocalBtn();
+//pageInputForm();
 
 
-//have both local and remote storage for the project
-//create display function to display all the HTML cards with their respective caracteristics after reloading
-//add regex to each the inputs in the form
+
+//read checkbox after reload
+//add regex to inputs in the form
+//add remote storage
 
 //Finishing touches
 //no blind spots in the card creator
