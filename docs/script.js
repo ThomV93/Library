@@ -4,6 +4,8 @@ const cardCreator_div = document.getElementById("creator-container");
 const cardDeleteButton_btn = document.getElementsByClassName("delete-btn");
 const cardEditButton_btn = document.getElementsByClassName("edit-btn");
 const cardSwitchCheckbox_chb = document.getElementsByClassName("switch-checkbox");
+const cardSwitchSlider_span = document.getElementsByClassName("slider");
+const cardSwitchBall_span = document.getElementsByClassName("slider-ball");
 const plus_div = document.getElementById("plus");
 const formContainer_div = document.getElementById("form-container");
 const formTitle_h2 = document.getElementById("form-title");
@@ -87,10 +89,13 @@ function displayBook(book) {
     cardSwitchLabelInput.type = "checkbox";
 
     let cardSwitchLabelSpan = document.createElement("span");
-    cardSwitchLabelSpan.className = "slider round";
+    cardSwitchLabelSpan.className = "slider";
+
+    let cardSwitchBallSpan = document.createElement("span");
+    cardSwitchBallSpan.className = "slider-ball";
     
     //append info to label
-    cardSwitchLabel.append(cardSwitchLabelInput, cardSwitchLabelSpan);
+    cardSwitchLabel.append(cardSwitchLabelInput, cardSwitchLabelSpan, cardSwitchBallSpan);
     //append all switch info to container
     cardSwitchContainer.append(cardSwitchP, cardSwitchLabel);
 
@@ -248,7 +253,6 @@ function editBtnFormlistener() {
 function editCardButton() {
     let lastBookEditBtn = Array.from(cardEditButton_btn).pop();
     lastBookEditBtn.addEventListener("click", e => {
-        console.log(e);
         //select HTML elements to edit
         let chosenCard = e.path[2];
         let cardPosition = chosenCard.dataset.position;
@@ -285,12 +289,19 @@ function deleteCardButton() {
 //add event to the switch checkbox and alters the read key in the respective object
 function readCheckbox(item) {
     let lastSwitchCheckbox = Array.from(cardSwitchCheckbox_chb).pop();
-    lastSwitchCheckbox.addEventListener("change", () => {
-        if (lastSwitchCheckbox.checked){
-            item.read = true;
+    lastSwitchCheckbox.addEventListener("change", e => {
+        let pos = e.path[4].dataset.position;
+        item.read = !item.read;
+        if (item.read === true){
+            cardSwitchSlider_span[pos].style.backgroundColor = "#e52c30";
+            cardSwitchSlider_span[pos].style.boxShadow = "0 0 1px #e52c30";
+            cardSwitchBall_span[pos].style.transform = "translateX(26px)";
         } else {
-            item.read = false;
+            cardSwitchSlider_span[pos].style.backgroundColor = "#fff";
+            cardSwitchSlider_span[pos].style.boxShadow = "0 0 1px #fff";
+            cardSwitchBall_span[pos].style.transform = "translateX(0)";
         };
+        localSaveLibrary();//update the myLibrary array in the local storage
         totalCompleteBooks();
         totalCompletePages();
     });
@@ -364,11 +375,21 @@ function localSaveLibrary() {
     localStorage.setItem("myLibrary", JSON.stringify(myLibrary)); //JSON.stringify converts all objects to strings. The server only accepts strings
 };
 
+
+function toggleSlider(item, iteration) {
+    if (item.read === true) {
+        cardSwitchSlider_span[iteration].style.backgroundColor = "#e52c30";
+        cardSwitchSlider_span[iteration].style.boxShadow = "0 0 1px #e52c30";
+        cardSwitchBall_span[iteration].style.transform = "translateX(26px)";
+    };
+};
+
 //repopulates the display after recovering the data from storage
 function displayCards() {
     for (i = 0; i < myLibrary.length; i++) {
         displayBook(myLibrary[i]);//create the visual display for each book
         readCheckbox(myLibrary[i]);
+        toggleSlider(myLibrary[i], i);
         editCardButton();
         deleteCardButton();
         totalBooks();//calculate and displays the total number of books
@@ -392,6 +413,7 @@ function restoreLibrary() {
 }
 
 
+//Delete local data stored
 function deleteLocalBtn() {
     deleteLocalStorage_btn.addEventListener("click", () => {
         localStorage.clear();
@@ -410,7 +432,6 @@ deleteLocalBtn();
 
 
 
-//read checkbox after reload
 //add regex to inputs in the form
 //add remote storage
 

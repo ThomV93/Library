@@ -266,9 +266,10 @@ li > span {
     bottom: 0;
     background-color: #fff;
     transition: .4s;
+    border-radius: 34px;
 }
   
-.slider:before {
+.slider-ball {
     position: absolute;
     content: "";
     height: 16px;
@@ -277,27 +278,8 @@ li > span {
     bottom: 4px;
     background-color: #333;
     transition: .4s;
-}
-  
-input:checked + .slider {
-    background-color: #e52c30;
-}
-  
-input:focus + .slider {
-    box-shadow: 0 0 1px #e52c30;
-}
-  
-input:checked + .slider:before {
-    transform: translateX(26px);
-}
-  
-  /* Rounded sliders */
-.slider.round {
-    border-radius: 34px;
-}
-  
-.slider.round:before {
     border-radius: 50%;
+    z-index: 1;
 }
 
 .card-btn-container {
@@ -347,8 +329,8 @@ input:checked + .slider:before {
 }
 
 #creator-container > div:hover {
-    width: 200px;
-    height: 200px;
+    width: 220px;
+    height: 220px;
     transform: scale(1.1);
     background: linear-gradient(#fff,#fff), linear-gradient(#fff,#fff);
     background-position: center;
@@ -357,8 +339,8 @@ input:checked + .slider:before {
 }
 
 #plus {
-    width: 220px;
-    height: 220px;
+    width: 230px;
+    height: 230px;
     background: linear-gradient(#333,#333), linear-gradient(#333,#333);
     background-position: center;
     background-size: 50% 2px,2px 50%;
