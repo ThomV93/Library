@@ -6,7 +6,6 @@ const cardEditButton_btn = document.getElementsByClassName("edit-btn");
 const cardSwitchCheckbox_chb = document.getElementsByClassName("switch-checkbox");
 const cardSwitchSlider_span = document.getElementsByClassName("slider");
 const cardSwitchBall_span = document.getElementsByClassName("slider-ball");
-const plus_div = document.getElementById("plus");
 const formContainer_div = document.getElementById("form-container");
 const formTitle_h2 = document.getElementById("form-title");
 const formBtnContainer_div = document.getElementById("form-btn-container");
@@ -139,7 +138,7 @@ function addBookToLibrary(obj){
 
 //Makes the new book form visible
 function openForm() {
-    plus_div.addEventListener("click", () => {
+    cardCreator_div.addEventListener("click", () => {
         bookTitle_input.value = "";
         author_input.value = "";
         pages_input.value = "";
@@ -416,7 +415,3 @@ deleteLocalBtn();
 
 
 //add remote storage
-
-//Finishing touches
-//no blind spots in the card creator
-//can remove cloud storage btn
