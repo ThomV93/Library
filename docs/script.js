@@ -33,6 +33,7 @@ library.prototype.info = function() {
     return this.title + " by " + this.author + ", " + this.pages + ", " + this.read;
 };
 
+
 //Book object constructor
 function book(title, author, pages, read) {
     this.title = title,
@@ -156,24 +157,6 @@ function closeForm() {
 };
 
 
-//Add keyboard listener to the pages field of the form to allow only numbers
-/*function pageInputForm() {
-    pages_input.addEventListener("keydown", e => {
-        //regEx to check if the input is a number
-        let rawInput = parseInt(e.key);
-        let treatedInput = /[^0-9]/.test(rawInput);
-        let stringInput = treatedInput.toString();
-        console.log(stringInput);
-        console.log(typeof(stringInput));
-        
-
-        if (treatedInput === true) {
-            pages_input.value =+ stringInput;
-        }; 
-    });
-};*/
-
-
 //Add event listeners in each button of the form
 function createBookForm(newBook) {
     //cancel button
@@ -193,7 +176,7 @@ function createBookForm(newBook) {
         localSaveLibrary();//update the myLibrary array in the local storage
         displayBook(newBook);//create the visual display for each book
         readCheckbox(newBook);
-        editCardButton();
+        editCardButton(newBook);
         deleteCardButton();
         totalBooks();//calculate and displays the total number of books
         totalPages();//calculate and displays the total number of pages
@@ -225,9 +208,6 @@ function editBtnFormlistener() {
         //select correct HTML element values
         let allCardsInfo_div = document.getElementsByClassName("card-info");
         let correctCardInfo = allCardsInfo_div[bookPositionEdit];
-        correctCardInfo.childNodes[0].innerHTML;
-        correctCardInfo.childNodes[1].innerHTML;
-        correctCardInfo.childNodes[2].innerHTML;
 
         //alter HTML element values
         correctCardInfo.childNodes[0].innerHTML = bookTitle_input.value;
@@ -250,12 +230,12 @@ function editBtnFormlistener() {
 
 
 //add event to the edit button in the card and perform necessary actions
-function editCardButton() {
+function editCardButton(item) {
     let lastBookEditBtn = Array.from(cardEditButton_btn).pop();
     lastBookEditBtn.addEventListener("click", e => {
         //select HTML elements to edit
         let chosenCard = e.path[2];
-        let cardPosition = chosenCard.dataset.position;
+        let cardPosition = myLibrary.indexOf(item);
         let chosenCardTitle = chosenCard.getElementsByClassName("card-title");
         let chosenCardAuthor = chosenCard.getElementsByClassName("card-author");
         let chosenCardPages = chosenCard.getElementsByClassName("card-pages");
@@ -263,7 +243,7 @@ function editCardButton() {
         //populate the form with the current values of each field
         bookTitle_input.value = chosenCardTitle[0].innerHTML;
         author_input.value = chosenCardAuthor[0].innerHTML;
-        pages_input.value = chosenCardPages[0].innerHTML;
+        pages_input.value = parseInt(chosenCardPages[0].innerHTML);
 
         editFormButton(cardPosition);
     });
@@ -376,6 +356,7 @@ function localSaveLibrary() {
 };
 
 
+//checks the slider if the book is already read after page reload
 function toggleSlider(item, iteration) {
     if (item.read === true) {
         cardSwitchSlider_span[iteration].style.backgroundColor = "#e52c30";
@@ -384,17 +365,20 @@ function toggleSlider(item, iteration) {
     };
 };
 
+
 //repopulates the display after recovering the data from storage
 function displayCards() {
     for (i = 0; i < myLibrary.length; i++) {
         displayBook(myLibrary[i]);//create the visual display for each book
         readCheckbox(myLibrary[i]);
         toggleSlider(myLibrary[i], i);
-        editCardButton();
+        editCardButton(myLibrary[i]);
         deleteCardButton();
         totalBooks();//calculate and displays the total number of books
         totalPages();//calculate and displays the total number of pages
     };
+    totalCompleteBooks();
+    totalCompletePages();
 };
 
 
@@ -428,12 +412,11 @@ createBookForm();
 activateSearchBar();
 restoreLibrary();
 deleteLocalBtn();
-//pageInputForm();
 
 
 
-//add regex to inputs in the form
 //add remote storage
 
 //Finishing touches
 //no blind spots in the card creator
+//can remove cloud storage btn
