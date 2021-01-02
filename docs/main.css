@@ -63,7 +63,7 @@ button:focus {
 }
 
 #search {
-    width: 240px;
+    width: 280px;
     border: 2px solid #333;
     border-radius: 22px;
     color: #333;
@@ -116,7 +116,7 @@ button:focus {
     font-family: 'Cormorant Garamond', serif;
     font-weight: bold;
     font-size: 2.3rem;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 #data-list {
@@ -140,7 +140,7 @@ li > span {
     font-family: 'Cormorant Garamond', serif;
     font-weight: bold;
     font-size: 2.3rem;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .delete-storage-btn {
