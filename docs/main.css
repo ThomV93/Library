@@ -1,3 +1,5 @@
+/* Global */
+
 html, main {
     height: 100vh;
     width: 100vw;
@@ -12,6 +14,8 @@ main {
     grid-template-rows: repeat(12, 1fr);
     overflow: auto;
 }
+
+/* Global button */
 
 button {
     font-family: 'Proza Libre', sans-serif;
@@ -36,6 +40,8 @@ button:hover {
 button:focus {
     outline: none;
 }
+
+/* ------------Navbar------------- */
 
 #nav-bar {
     display: flex;
@@ -62,6 +68,8 @@ button:focus {
     text-align: right;
 }
 
+/* Searchbar */
+
 #search {
     width: 280px;
     border: 2px solid #333;
@@ -74,6 +82,8 @@ button:focus {
 #search:focus {
     outline: none;
 }
+
+/* Log button for cloud storage implementation */
 
 #log-btn {
     display: none;
@@ -92,6 +102,8 @@ button:focus {
     color: #fff;
 }
 
+/* --------------Sidebar--------------- */
+
 #side-bar {
     display: flex;
     flex-direction: column;
@@ -105,6 +117,8 @@ button:focus {
     padding: 2rem;
     box-shadow: 6px 6px 8px 2px #000;
 }
+
+/* Sidebar data display */
 
 #side-bar-data {
     width: 100%;
@@ -130,6 +144,8 @@ button:focus {
 li > span {
     float: right;
 }
+
+/* Sidebar storage */
 
 #side-bar-storage {
     width: 100%;
@@ -157,6 +173,8 @@ li > span {
     display: none;
 }
 
+/* Sidebar credit */
+
 #side-bar-credit {
     display: flex;
     justify-content: center;
@@ -164,6 +182,8 @@ li > span {
     width: 100%;
     margin-bottom: -3rem;
 }
+
+/* Git image effect */
 
 #img-container {
     height: 32px;
@@ -185,6 +205,8 @@ li > span {
     padding-left: 10px;
 }
 
+/* -----------------Card container------------------- */
+
 #card-container {
     display: flex;
     flex-wrap: wrap;
@@ -197,6 +219,8 @@ li > span {
     background-color: #B90E18;
     font-family: 'Proza Libre', sans-serif;
 }
+
+/* Card */
 
 .card {
     display: flex;
@@ -211,6 +235,8 @@ li > span {
     color: #000;
     border-radius: 10px;
 }
+
+/* Card Data */
 
 .card-info {
     display: flex;
@@ -262,7 +288,7 @@ li > span {
     height: 0;
 }
   
-  /* The slider */
+  /* Slider */
 .slider {
     position: absolute;
     cursor: pointer;
@@ -287,6 +313,8 @@ li > span {
     border-radius: 50%;
     z-index: 1;
 }
+
+/* Card buttons */
 
 .card-btn-container {
     display: flex;
@@ -316,7 +344,7 @@ li > span {
     box-shadow: 0 31px 46px -10px rgba(0,0,0,0.6);
 }
 
-/* New book creator */
+/* ------------------New book creator---------------------- */
 
 #creator-container {
     display: flex;
@@ -350,7 +378,8 @@ li > span {
     background-repeat: no-repeat;
 }
 
-/* New book form */
+/* ----------------New book form---------------- */
+
 #form-container {
     display: none;
     justify-content: center;
@@ -400,6 +429,8 @@ li > span {
 #book-creation-form > input:focus {
     outline: none;
 }
+
+/* Form Buttons */
 
 #form-btn-container {
     display: flex;

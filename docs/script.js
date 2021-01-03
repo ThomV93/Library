@@ -1,3 +1,4 @@
+//All global variables used
 let myLibrary = [];
 const cardContainer_div = document.getElementById("card-container");
 const cardCreator_div = document.getElementById("creator-container");
@@ -165,15 +166,17 @@ function createBookForm(newBook) {
 
     //create new book button
     formCreateBtn.addEventListener("click", () => {
+        //store the values provided by the user in the form
         let inputTitle = bookTitle_input.value;
         let inputAuthor = author_input.value;
         let inputPages = pages_input.value;
 
         //create a new book object with the provided values
         newBook = new book(inputTitle, inputAuthor, inputPages, false);
+
         addBookToLibrary(newBook);
         localSaveLibrary();//update the myLibrary array in the local storage
-        displayBook(newBook);//create the visual display for each book
+        displayBook(newBook);//create the visual display for the book object
         readCheckbox(newBook);
         editCardButton(newBook);
         deleteCardButton();
@@ -200,7 +203,7 @@ function editFormButton(idx) {
 //add event listener to the form edit button
 function editBtnFormlistener() {
     formEditBtn.addEventListener("click", () => {
-        //select correct book obj
+        //select correct book object
         let bookPositionEdit = formTitle_h2.innerHTML.slice(-1);
         let obj = myLibrary[bookPositionEdit];
 
@@ -218,11 +221,11 @@ function editBtnFormlistener() {
         obj.author = author_input.value;
         obj.pages = pages_input.value;
 
-        totalBooks();
+        totalBooks();//calculate data for the side bar
         totalPages();
         totalCompleteBooks();
         totalCompletePages();
-        localSaveLibrary();
+        localSaveLibrary();//update the myLibrary array in the local storage
         closeForm();
     });
 };
@@ -259,7 +262,7 @@ function deleteCardButton() {
         } else {
             myLibrary.splice(bookPosition, 1);
             localSaveLibrary();
-            e.path[2].remove();
+            e.path[2].remove();//delete the HTML card element
         };
     });
 };
@@ -292,6 +295,7 @@ function searchBar() {
     let filter = searchBar_input.value.toUpperCase();
     let cards = cardContainer_div.getElementsByClassName("card");
     let txtValue;
+    //loop through the list hiding the values that don't match the value in the searchbar
     for (i = 1; i < cards.length; i++) {
         let card = cards[i];
         txtValue = card.textContent || card.innerText;
@@ -387,7 +391,7 @@ function restoreLibrary() {
         //populates the display
         displayCards();
     } else {
-        //recover the info stored locally
+        //retrieve the info stored locally
         let bookArray = localStorage.getItem('myLibrary')
         bookArray = JSON.parse(bookArray);
         myLibrary = bookArray;
@@ -396,7 +400,7 @@ function restoreLibrary() {
 }
 
 
-//Delete local data stored
+//Delete all local data stored
 function deleteLocalBtn() {
     deleteLocalStorage_btn.addEventListener("click", () => {
         localStorage.clear();
@@ -411,7 +415,3 @@ createBookForm();
 activateSearchBar();
 restoreLibrary();
 deleteLocalBtn();
-
-
-
-//add remote storage
