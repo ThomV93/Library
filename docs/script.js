@@ -296,15 +296,17 @@ function searchBar() {
     let cards = cardContainer_div.getElementsByClassName("card");
     let txtValue;
     //loop through the list hiding the values that don't match the value in the searchbar
-    for (i = 1; i < cards.length; i++) {
-        let card = cards[i];
-        txtValue = card.textContent || card.innerText;
+    for (i = 0; i < myLibrary.length; i++) {
+        let card = cards[i+1];
+        let bookObj = myLibrary[i];
+        console.log(bookObj.title);
+        txtValue = bookObj.title || bookObj.author;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
             card.style.display = "flex";
         } else {
             card.style.display = "none";
-        }
-    }
+        };
+    };
 };
 
 
