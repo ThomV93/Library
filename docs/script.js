@@ -24,27 +24,20 @@ const searchBar_input = document.getElementById("search");
 const deleteLocalStorage_btn = document.getElementById("delete-local-btn");
 
 
-//Prototype object
-function library() {};
+class book {
+    constructor(title, author, pages) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = false;
+    };
 
-
-//Add info function to the prototype of library
-library.prototype.info = function() {
-    return this.title + " by " + this.author + ", " + this.pages + ", " + this.read;
+    //get allows the methor to be called without ()
+    get info() {
+        let info = `${this.title} by ${this.author} has ${this.pages} pages.`;
+        return info;
+    };
 };
-
-
-//Book object constructor
-function book(title, author, pages, read) {
-    this.title = title,
-    this.author = author,
-    this.pages = pages,
-    this.read = read
-};
-
-
-//Set a copy of library prototype to each book contructed
-book.prototype = Object.create(library.prototype);
 
 
 //Create new book HTML structure for each book in the myLibrary array
@@ -166,13 +159,14 @@ function createBookForm(newBook) {
 
     //create new book button
     formCreateBtn.addEventListener("click", () => {
+        let libraryLength = myLibrary.length;
         //store the values provided by the user in the form
         let inputTitle = bookTitle_input.value;
         let inputAuthor = author_input.value;
         let inputPages = pages_input.value;
 
         //create a new book object with the provided values
-        newBook = new book(inputTitle, inputAuthor, inputPages, false);
+        let newBook = new book(inputTitle, inputAuthor, inputPages);
 
         addBookToLibrary(newBook);
         localSaveLibrary();//update the myLibrary array in the local storage
