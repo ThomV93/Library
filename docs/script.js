@@ -159,14 +159,13 @@ function createBookForm(newBook) {
 
     //create new book button
     formCreateBtn.addEventListener("click", () => {
-        let libraryLength = myLibrary.length;
         //store the values provided by the user in the form
         let inputTitle = bookTitle_input.value;
         let inputAuthor = author_input.value;
         let inputPages = pages_input.value;
 
         //create a new book object with the provided values
-        let newBook = new book(inputTitle, inputAuthor, inputPages);
+        newBook = new book(inputTitle, inputAuthor, inputPages);
 
         addBookToLibrary(newBook);
         localSaveLibrary();//update the myLibrary array in the local storage
