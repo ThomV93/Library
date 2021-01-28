@@ -416,7 +416,7 @@ const library = (() => {
         });
     };
 
-    
+    //run init function
     boardInit();
 
 })();
